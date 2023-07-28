@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice to text</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+
+</head>
+
+<body>
+    
+    <div class="voice_to_text">
+        
+        <h1>Voice To Text Convertor</h1>
+        <textarea id="text" placeholder="Speak.."></textarea>
+        <button id="click_to_convert">Voice to text</button>
+        <input id="filename" placeholder="Specify a filename..." />
+        <button id="download">SaveAs</button>
+
+
+    </div>
+    
+    <script type="text/javascript">
+        function downloadFile(filename, content) {
+
+            const element = document.createElement('a');
+
+
+            const blob = new Blob([content], { type: 'application/msword' });
+
+            
+            const fileUrl = URL.createObjectURL(blob);
+
+            
+            element.setAttribute('href', fileUrl); //file location
+            element.setAttribute('download', filename); // file name
+            element.style.display = 'none';
+
+            
+            document.body.appendChild(element);
+            element.click();
+
+            
+            document.body.removeChild(element);
+        };
+
+        window.onload = () => {
+            document.getElementById('download').
+                addEventListener('click', e => {
+                    
+                    
+                    const filename = document.getElementById('filename').value;
+                    
+                    
+                    const content = document.getElementById('text').value;
+                    
+
+                    if (filename && content) {
+                        downloadFile(filename, content);
+                    }
+                });
+        };
+        </script>
+
+    <script type="text/javascript" src="script.js"></script>
+
+    
+</body>
+
+</html>
